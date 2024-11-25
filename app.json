@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Calculadora Estoque Confecção",
+    "slug": "snack-7cdc932d-84bc-4efa-85cb-6d0906f6ef46",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.adynan.snack7cdc932d84bc4efa85cb6d0906f6ef46"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7a5d6e5c-1ee8-49c8-a098-19380dedc543"
+      }
+    }
+  }
+}
