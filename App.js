@@ -237,24 +237,6 @@ const InsumosCadastrados = ({
     : ''}
 </Text>
 
-<Text style={styles.tTexto}>
-  {item.linearMeter && item.costPrice && item.quantity && !isNaN((item.costPrice * item.quantity )/ item.linearMeter ) 
-    ? `Custo do Metro Linear: R$ ${((item.costPrice * item.quantity )/ item.linearMeter ).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-    : ''}
-</Text>
-
-<Text style={styles.tTexto}>
-  {item.linearMeter && item.width && !isNaN(item.linearMeter * item.width) && item.linearMeter !== "" && item.width !== "" 
-    ? `Metro Quadrado: ${parseFloat(item.linearMeter * item.width).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} m²`
-    : ''}
-</Text>
-
-<Text style={styles.tTexto}>
-  {item.linearMeter && item.width && item.quantity && item.costPrice && !isNaN(item.costPrice/(item.linearMeter * item.width)) 
-    && item.linearMeter !== "" && item.width !==  "" && item.costPrice !== "" 
-    ? `Custo do Metro Quadrado: R$ ${parseFloat(item.costPrice*item.quantity/(item.linearMeter * item.width) ).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-    : ''}
-</Text>
 
 {item.description && (
   <Text style={styles.tTexto}>Descrição: {item.description}</Text>
@@ -380,11 +362,8 @@ const InsumosEstoque = ({ soldTasks, deleteSoldTask: deletarEstoque }) => {
     : ''}
 </Text>
 
-<Text style={styles.tTexto}>
-  {item.linearMeter && item.costPrice && item.quantity && !isNaN((item.costPrice * item.quantity )/ item.linearMeter ) 
-    ? `Custo do Metro Linear: R$ ${((item.costPrice * item.quantity )/ item.linearMeter ).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-    : ''}
-</Text>
+
+
 
 <Text style={styles.tTexto}>
   {item.linearMeter && item.width && !isNaN(item.linearMeter * item.width) && item.linearMeter !== "" && item.width !== "" 
@@ -392,12 +371,7 @@ const InsumosEstoque = ({ soldTasks, deleteSoldTask: deletarEstoque }) => {
     : ''}
 </Text>
 
-<Text style={styles.tTexto}>
-  {item.linearMeter && item.width && item.quantity && item.costPrice && !isNaN(item.costPrice/(item.linearMeter * item.width)) 
-    && item.linearMeter !== "" && item.width !==  "" && item.costPrice !== "" 
-    ? `Custo do Metro Quadrado: R$ ${parseFloat(item.costPrice*item.quantity/(item.linearMeter * item.width) ).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-    : ''}
-</Text>
+
 {item.description && (
   <Text style={styles.tTexto}>Descrição: {item.description}</Text>
 )}
