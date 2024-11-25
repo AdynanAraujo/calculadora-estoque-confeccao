@@ -161,14 +161,30 @@ const InsumosCadastrados = ({
 
   // Cálculo
   const totalCostPrice = filteredTasks.reduce(
-    (acc, task) =>
-      acc +
-      parseFloat(task.costPrice.replace(',', '.')) *
-        parseFloat(task.quantity.replace(',', '.')),
+    (acc, task) => {
+      const linearMeter = parseFloat(task.linearMeter.replace(',', '.'));
+      const quantity = parseFloat(task.quantity.replace(',', '.'));
+      const costPrice = parseFloat(task.costPrice.replace(',', '.'));
+  
+      // Set linearMeter to 1 if it's NaN or zero
+      const validLinearMeter = isNaN(linearMeter) || linearMeter === 0 ? 1 : linearMeter;
+  
+      return acc + costPrice * validLinearMeter * quantity;
+    },
     0
   );
+  
   const totalVendido = filteredTasks.reduce(
-    (acc, task) => acc + parseFloat(task.sellPrice) * parseFloat(task.quantity),
+    (acc, task) => {
+      const linearMeter = parseFloat(task.linearMeter.replace(',', '.'));
+      const quantity = parseFloat(task.quantity);
+      const sellPrice = parseFloat(task.sellPrice);
+  
+      // Set linearMeter to 1 if it's NaN or zero
+      const validLinearMeter = isNaN(linearMeter) || linearMeter === 0 ? 1 : linearMeter;
+  
+      return acc + sellPrice * validLinearMeter * quantity;
+    },
     0
   );
   const totalProfit = totalVendido - totalCostPrice;
@@ -206,8 +222,9 @@ const InsumosCadastrados = ({
               Preço de compra: R$ {parseFloat(item.costPrice).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </Text>
             <Text style={styles.tTexto}>
-              Total em compras: R$ {parseFloat(item.costPrice*item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-            </Text>
+  Total em compras: R$ {parseFloat(item.costPrice * item.quantity * (isNaN(item.linearMeter) || !item.linearMeter ? 1 : item.linearMeter)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+</Text>
+
             <Text style={styles.tTexto}>
   {item.width && !isNaN(item.width) && item.width !== "" 
     ? `Largura: ${parseFloat(item.width).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} m`
@@ -349,8 +366,8 @@ const InsumosEstoque = ({ soldTasks, deleteSoldTask: deletarEstoque }) => {
               Preço de compra: R$ {parseFloat(item.costPrice).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </Text>
             <Text style={styles.tTexto}>
-              Total em compras: R$ {parseFloat(item.costPrice*item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-            </Text>
+  Total em compras: R$ {parseFloat(item.costPrice * item.quantity * (isNaN(item.linearMeter) || !item.linearMeter ? 1 : item.linearMeter)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+</Text>
             <Text style={styles.tTexto}>
   {item.width && !isNaN(item.width) && item.width !== "" 
     ? `Largura: ${parseFloat(item.width).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} m`
