@@ -318,12 +318,18 @@ const InsumosEstoque = ({ soldTasks, deleteSoldTask: deletarEstoque }) => {
     .reverse();
 
   // Cálculo
+
   const totalCostPrice = filtrarInsumosEstoque.reduce(
-    (acc, task) => acc + parseFloat(task.costPrice) * parseFloat(task.quantity),
-    0
-  );
-  const totalVendido = filtrarInsumosEstoque.reduce(
-    (acc, task) => acc + parseFloat(task.sellPrice) * parseFloat(task.quantity),
+    (acc, task) => {
+      const linearMeter = parseFloat(task.linearMeter.replace(',', '.'));
+      const quantity = parseFloat(task.quantity.replace(',', '.'));
+      const costPrice = parseFloat(task.costPrice.replace(',', '.'));
+  
+      // Set linearMeter to 1 if it's NaN or zero
+      const validLinearMeter = isNaN(linearMeter) || linearMeter === 0 ? 1 : linearMeter;
+  
+      return acc + costPrice * validLinearMeter * quantity;
+    },
     0
   );
   
@@ -365,11 +371,7 @@ const InsumosEstoque = ({ soldTasks, deleteSoldTask: deletarEstoque }) => {
 
 
 
-<Text style={styles.tTexto}>
-  {item.linearMeter && item.width && !isNaN(item.linearMeter * item.width) && item.linearMeter !== "" && item.width !== "" 
-    ? `Metro Quadrado: ${parseFloat(item.linearMeter * item.width).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} m²`
-    : ''}
-</Text>
+
 
 
 {item.description && (
